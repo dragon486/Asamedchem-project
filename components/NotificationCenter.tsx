@@ -123,32 +123,33 @@ export default function NotificationCenter() {
     <>
       <style>{`
         .notification-bell-container {
-          position: fixed;
-          top: 0.75rem;
-          right: 1.5rem;
+          position: relative;
           z-index: 10000;
+          display: flex;
+          align-items: center;
+          height: 2.25rem;
         }
         .notification-bell-btn {
-          width: 2.5rem;
-          height: 2.5rem;
+          width: 2.25rem;
+          height: 2.25rem;
           border-radius: 50%;
           background: white;
-          border: 1px solid var(--border);
-          box-shadow: var(--shadow-md);
+          border: 1px solid #e2e8f0;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.15rem;
+          font-size: 1rem;
           cursor: pointer;
           position: relative;
           transition: all 0.2s ease;
-          color: var(--muted-foreground);
+          color: #64748b;
         }
         .notification-bell-btn:hover {
           transform: scale(1.05);
-          color: var(--primary);
-          border-color: var(--primary);
-          box-shadow: 0 0 0 3px rgb(79 70 229 / 0.1), var(--shadow-md);
+          background: #f1fcf6;
+          border-color: rgba(15, 81, 50, 0.2);
+          color: var(--primary-forest);
+          box-shadow: var(--shadow-md);
         }
         .notification-bell-badge {
           position: absolute;
@@ -181,7 +182,7 @@ export default function NotificationCenter() {
         .notification-dropdown {
           position: absolute;
           top: 3rem;
-          right: 0;
+          right: -10px;
           width: 320px;
           background: white;
           border: 1px solid var(--border);
