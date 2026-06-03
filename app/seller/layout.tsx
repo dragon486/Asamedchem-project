@@ -1,8 +1,7 @@
-// app/seller/layout.tsx
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
-import NotificationCenter from "@/components/NotificationCenter";
+import Header from "@/components/Header";
 
 export default async function SellerLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
@@ -12,13 +11,9 @@ export default async function SellerLayout({ children }: { children: React.React
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar
-        role="seller"
-        userName={session.user?.name ?? "Seller"}
-        userEmail={session.user?.email ?? ""}
-      />
+      <Sidebar role="seller" />
       <div className="main-content">
-        <NotificationCenter />
+        <Header session={session} />
         {children}
       </div>
     </div>
