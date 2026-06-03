@@ -1,6 +1,6 @@
-# AasaMedChem(Project) — Inventory & Order Management System
+# SynTrace — Inventory & Order Management System
 
-A full-stack pharmaceutical inventory and order management system built for the AasaMedChem hackathon recruitment challenge.
+A full-stack pharmaceutical inventory and order management system built for the hackathon recruitment challenge.
 
 **Live Demo:** *(Add your Vercel URL here after deployment)*  
 **Test Credentials:**
@@ -11,7 +11,7 @@ A full-stack pharmaceutical inventory and order management system built for the 
 
 ## Project Overview
 
-AasaMedChem is a multi-role inventory and quotation/order management platform. Admins manage products, categories, and orders; Sellers browse the catalogue, select quantities in any supported unit, see real-time pricing, and place quotations.
+SynTrace is a multi-role inventory and quotation/order management platform. Admins manage products, categories, and orders; Sellers browse the catalogue, select quantities in any supported unit, see real-time pricing, and place quotations.
 
 ### Features
 - 🔐 Role-based authentication (Admin / Seller)

@@ -400,7 +400,7 @@ export default function LoginPage() {
         {/* RIGHT */}
         <div className="login-right">
           <div className="login-logo" style={{ marginBottom: "2rem" }}>
-            <img src="/logo.png" alt="AasaMedChem Logo" style={{ height: "36px", width: "auto", objectFit: "contain" }} />
+            <img src="/logo.png" alt="SynTrace Logo" style={{ height: "36px", width: "auto", objectFit: "contain" }} />
           </div>
 
           <div className="login-form-area">

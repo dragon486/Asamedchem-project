@@ -44,7 +44,7 @@ export default function Sidebar({ role }: SidebarProps) {
       <aside className="sidebar">
         {/* Brand Header */}
         <div className="sidebar-logo" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "0.25rem", borderBottom: "1px solid #e2e8f0", padding: "1rem 1.25rem" }}>
-          <img src="/logo.png" alt="AasaMedChem Logo" style={{ height: "30px", width: "auto", objectFit: "contain", maxWidth: "100%" }} />
+          <img src="/logo.png" alt="SynTrace Logo" style={{ height: "30px", width: "auto", objectFit: "contain", maxWidth: "100%" }} />
           <div style={{ fontSize: "0.6875rem", opacity: 0.6, fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
             {role === "admin" ? "Admin Panel" : "Seller Portal"}
           </div>

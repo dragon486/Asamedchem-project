@@ -64,9 +64,9 @@ export default function RegisterPage() {
     <div className="auth-page">
       <div className="auth-card fade-in">
         <div className="auth-logo" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem", marginBottom: "1.5rem" }}>
-          <img src="/logo.png" alt="AasaMedChem Logo" style={{ height: "36px", width: "auto", objectFit: "contain" }} />
+          <img src="/logo.png" alt="SynTrace Logo" style={{ height: "36px", width: "auto", objectFit: "contain" }} />
           <h1 style={{ fontSize: "1.25rem", marginTop: "0.5rem" }}>Create Account</h1>
-          <p>Join AasaMedChem as a Seller</p>
+          <p>Join SynTrace as a Seller</p>
         </div>
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>

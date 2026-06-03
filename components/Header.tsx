@@ -261,7 +261,7 @@ export default function Header({ session }: HeaderProps) {
         </button>
 
         <div className="mobile-logo">
-          <img src="/logo.png" alt="AasaMedChem Logo" style={{ height: "24px", width: "auto", objectFit: "contain" }} />
+          <img src="/logo.png" alt="SynTrace Logo" style={{ height: "24px", width: "auto", objectFit: "contain" }} />
         </div>
 
         <form onSubmit={handleSearchSubmit} className="search-form">

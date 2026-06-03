@@ -4,11 +4,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "AasaMedChem | Inventory & Order Management",
-    template: "%s | AasaMedChem",
+    default: "SynTrace | Inventory & Order Management",
+    template: "%s | SynTrace",
   },
   description:
-    "AasaMedChem pharmaceutical inventory and order management system — manage products, quotations, and orders with full unit conversion support.",
+    "SynTrace pharmaceutical inventory and order management system — manage products, quotations, and orders with full unit conversion support.",
 };
 
 export default function RootLayout({
