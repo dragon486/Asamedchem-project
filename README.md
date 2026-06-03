@@ -1,4 +1,4 @@
-# AasaMedChem — Inventory & Order Management System
+# AasaMedChem(Project) — Inventory & Order Management System
 
 A full-stack pharmaceutical inventory and order management system built for the AasaMedChem hackathon recruitment challenge.
 
