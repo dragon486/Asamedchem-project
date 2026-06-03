@@ -2,7 +2,7 @@
 // app/seller/products/SellerProductBrowser.tsx
 // The core seller experience: browse, filter, see prices in any unit, add to cart
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   formatINR,
   DIMENSION_UNITS,
@@ -58,13 +58,20 @@ function saveCart(items: CartItem[]) {
 
 export default function SellerProductBrowser({ products, categories }: Props) {
   const router = useRouter();
-  const [search, setSearch] = useState("");
+  const searchParams = useSearchParams();
+
+  const initialSearch = searchParams.get("search") ?? "";
+  const [search, setSearch] = useState(initialSearch);
   const [filterCat, setFilterCat] = useState("");
   const [filterDim, setFilterDim] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedUnit, setSelectedUnit] = useState<Record<string, Unit>>({});
   const [quantity, setQuantity] = useState<Record<string, string>>({});
   const [addedFeedback, setAddedFeedback] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSearch(searchParams.get("search") ?? "");
+  }, [searchParams]);
 
   useEffect(() => {
     setCart(loadCart());

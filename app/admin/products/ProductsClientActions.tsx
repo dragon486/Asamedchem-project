@@ -1,10 +1,10 @@
 "use client";
 // app/admin/products/ProductsClientActions.tsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { formatINR, DIMENSION_UNITS, pricePerDisplayUnit } from "@/lib/conversions";
 import type { Product, Category } from "@/lib/schema";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   products: (Product & { category: { name: string } | null })[];
@@ -13,10 +13,17 @@ interface Props {
 
 export default function ProductsClientActions({ products, categories }: Props) {
   const router = useRouter();
-  const [search, setSearch] = useState("");
+  const searchParams = useSearchParams();
+  
+  const initialSearch = searchParams.get("search") ?? "";
+  const [search, setSearch] = useState(initialSearch);
   const [filterCat, setFilterCat] = useState("");
   const [filterDim, setFilterDim] = useState("");
   const [deleting, setDeleting] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSearch(searchParams.get("search") ?? "");
+  }, [searchParams]);
 
   const filtered = products.filter((p) => {
     const matchSearch =
