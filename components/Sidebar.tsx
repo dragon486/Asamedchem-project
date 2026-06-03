@@ -2,7 +2,6 @@
 // components/Sidebar.tsx
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
 
 interface NavItem {
   href: string;
@@ -12,8 +11,6 @@ interface NavItem {
 
 interface SidebarProps {
   role: "admin" | "seller";
-  userName: string;
-  userEmail: string;
 }
 
 const ADMIN_NAV: NavItem[] = [
@@ -32,28 +29,24 @@ const SELLER_NAV: NavItem[] = [
   { href: "/seller/orders",    label: "My Orders",   icon: "bi bi-receipt" },
 ];
 
-export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
+export default function Sidebar({ role }: SidebarProps) {
   const pathname = usePathname();
   const nav = role === "admin" ? ADMIN_NAV : SELLER_NAV;
-  const initials = userName
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
 
   return (
     <aside className="sidebar">
+      {/* Brand Header */}
       <div className="sidebar-logo">
-        <i className="bi bi-prescription2" style={{ fontSize: "1.25rem" }}></i>
+        <i className="bi bi-prescription2" style={{ fontSize: "1.25rem", color: "var(--primary-forest)" }}></i>
         <div>
           <div style={{ fontSize: "0.9375rem" }}>AasaMedChem</div>
-          <div style={{ fontSize: "0.6875rem", opacity: 0.5, fontWeight: 400, marginTop: "1px" }}>
+          <div style={{ fontSize: "0.6875rem", opacity: 0.6, fontWeight: 500, marginTop: "1px" }}>
             {role === "admin" ? "Admin Panel" : "Seller Portal"}
           </div>
         </div>
       </div>
 
+      {/* Navigation */}
       <nav className="sidebar-nav">
         <div className="sidebar-section">
           <div className="sidebar-section-title">
@@ -61,9 +54,9 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
           </div>
           {nav.map((item) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className={`sidebar-link ${pathname === item.href || pathname.startsWith(item.href + "/") ? "active" : ""}`}
+               key={item.href}
+               href={item.href}
+               className={`sidebar-link ${pathname === item.href || pathname.startsWith(item.href + "/") ? "active" : ""}`}
             >
               <i className={item.icon} style={{ fontSize: "1.05rem" }}></i>
               <span>{item.label}</span>
@@ -71,28 +64,6 @@ export default function Sidebar({ role, userName, userEmail }: SidebarProps) {
           ))}
         </div>
       </nav>
-
-      <div className="sidebar-bottom">
-        <div className="sidebar-user">
-          <div className="avatar">{initials}</div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "white", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-              {userName}
-            </div>
-            <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.5)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-              {userEmail}
-            </div>
-          </div>
-        </div>
-        <button
-          onClick={() => signOut({ callbackUrl: "/login" })}
-          className="sidebar-link"
-          style={{ width: "100%", background: "none", border: "none", cursor: "pointer", color: "rgba(255,100,100,0.8)", marginTop: "0.25rem", textAlign: "left" }}
-        >
-          <i className="bi bi-box-arrow-right"></i>
-          <span>Sign out</span>
-        </button>
-      </div>
     </aside>
   );
 }
