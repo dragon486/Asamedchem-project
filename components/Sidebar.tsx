@@ -33,37 +33,51 @@ export default function Sidebar({ role }: SidebarProps) {
   const pathname = usePathname();
   const nav = role === "admin" ? ADMIN_NAV : SELLER_NAV;
 
+  const handleLinkClick = () => {
+    if (typeof document !== "undefined") {
+      document.body.classList.remove("sidebar-open");
+    }
+  };
+
   return (
-    <aside className="sidebar">
-      {/* Brand Header */}
-      <div className="sidebar-logo">
-        <i className="bi bi-prescription2" style={{ fontSize: "1.25rem", color: "var(--primary-forest)" }}></i>
-        <div>
-          <div style={{ fontSize: "0.9375rem" }}>AasaMedChem</div>
-          <div style={{ fontSize: "0.6875rem", opacity: 0.6, fontWeight: 500, marginTop: "1px" }}>
+    <>
+      <aside className="sidebar">
+        {/* Brand Header */}
+        <div className="sidebar-logo" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "0.25rem", borderBottom: "1px solid #e2e8f0", padding: "1rem 1.25rem" }}>
+          <img src="/logo.png" alt="AasaMedChem Logo" style={{ height: "30px", width: "auto", objectFit: "contain", maxWidth: "100%" }} />
+          <div style={{ fontSize: "0.6875rem", opacity: 0.6, fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
             {role === "admin" ? "Admin Panel" : "Seller Portal"}
           </div>
         </div>
-      </div>
 
-      {/* Navigation */}
-      <nav className="sidebar-nav">
-        <div className="sidebar-section">
-          <div className="sidebar-section-title">
-            {role === "admin" ? "Administration" : "Seller"}
+        {/* Navigation */}
+        <nav className="sidebar-nav">
+          <div className="sidebar-section">
+            <div className="sidebar-section-title">
+              {role === "admin" ? "Administration" : "Seller"}
+            </div>
+            {nav.map((item) => (
+              <Link
+                 key={item.href}
+                 href={item.href}
+                 className={`sidebar-link ${pathname === item.href || pathname.startsWith(item.href + "/") ? "active" : ""}`}
+                 onClick={handleLinkClick}
+              >
+                <i className={item.icon} style={{ fontSize: "1.05rem" }}></i>
+                <span>{item.label}</span>
+              </Link>
+            ))}
           </div>
-          {nav.map((item) => (
-            <Link
-               key={item.href}
-               href={item.href}
-               className={`sidebar-link ${pathname === item.href || pathname.startsWith(item.href + "/") ? "active" : ""}`}
-            >
-              <i className={item.icon} style={{ fontSize: "1.05rem" }}></i>
-              <span>{item.label}</span>
-            </Link>
-          ))}
-        </div>
-      </nav>
-    </aside>
+        </nav>
+      </aside>
+      <div 
+        className="sidebar-overlay" 
+        onClick={() => {
+          if (typeof document !== "undefined") {
+            document.body.classList.remove("sidebar-open");
+          }
+        }} 
+      />
+    </>
   );
 }

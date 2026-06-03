@@ -71,6 +71,26 @@ export default function Header({ session }: HeaderProps) {
   return (
     <header className="top-bar">
       <style>{`
+        .hamburger-toggle {
+          display: none;
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          color: var(--foreground);
+          cursor: pointer;
+          padding: 0.25rem;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0.375rem;
+          transition: background 0.15s ease;
+        }
+        .hamburger-toggle:hover {
+          background: #f1f5f9;
+        }
+        .mobile-logo {
+          display: none;
+          align-items: center;
+        }
         .search-form {
           display: flex;
           align-items: center;
@@ -185,22 +205,79 @@ export default function Header({ session }: HeaderProps) {
           background: #fef2f2;
           color: #991b1b;
         }
+
+        @media (max-width: 1024px) {
+          .hamburger-toggle {
+            display: flex;
+          }
+          .mobile-logo {
+            display: flex;
+          }
+          .kbd-shortcut {
+            display: none;
+          }
+          .search-container {
+            width: 160px;
+          }
+        }
+        @media (max-width: 768px) {
+          .profile-info {
+            display: none;
+          }
+          .header-profile {
+            padding-left: 0.5rem;
+            border-left: none;
+          }
+          .header-actions {
+            gap: 0.75rem;
+          }
+        }
+        @media (max-width: 480px) {
+          .mobile-logo img {
+            height: 18px;
+          }
+          .search-container {
+            width: 110px;
+          }
+          .search-container input::placeholder {
+            color: transparent;
+          }
+        }
       `}</style>
 
-      {/* Left: Functional Instant Search Bar */}
-      <form onSubmit={handleSearchSubmit} className="search-form">
-        <div className="search-container">
-          <i className="bi bi-search"></i>
-          <input 
-            ref={inputRef}
-            type="text" 
-            placeholder="Search products..." 
-            value={searchQuery}
-            onChange={(e) => handleSearchChange(e.target.value)}
-          />
-          <span className="kbd-shortcut">⌘ F</span>
+      {/* Left: Hamburger, Mobile Logo & Search Bar */}
+      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+        <button 
+          type="button"
+          className="hamburger-toggle" 
+          onClick={() => {
+            if (typeof document !== "undefined") {
+              document.body.classList.toggle("sidebar-open");
+            }
+          }}
+          aria-label="Toggle sidebar"
+        >
+          <i className="bi bi-list"></i>
+        </button>
+
+        <div className="mobile-logo">
+          <img src="/logo.png" alt="AasaMedChem Logo" style={{ height: "24px", width: "auto", objectFit: "contain" }} />
         </div>
-      </form>
+
+        <form onSubmit={handleSearchSubmit} className="search-form">
+          <div className="search-container">
+            <i className="bi bi-search"></i>
+            <input 
+              ref={inputRef}
+              type="text" 
+              placeholder="Search products..." 
+              value={searchQuery}
+              onChange={(e) => handleSearchChange(e.target.value)}
+            />
+            <span className="kbd-shortcut">⌘ F</span>
+          </div>
+        </form>
+      </div>
 
       {/* Right: Actions (Notification, Clickable Profile Dropdown) */}
       <div className="header-actions">

@@ -9,10 +9,17 @@ export default function RegisterPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [emailSpaceError, setEmailSpaceError] = useState(false);
+  const [passwordSpaceError, setPasswordSpaceError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    if (form.email.includes(" ") || form.password.includes(" ")) {
+      setError("Please remove all spaces from your email and password.");
+      return;
+    }
 
     if (form.password !== form.confirmPassword) {
       setError("Passwords do not match.");
@@ -43,15 +50,22 @@ export default function RegisterPage() {
     router.push("/login?registered=1");
   };
 
-  const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
-    setForm((f) => ({ ...f, [field]: e.target.value }));
+  const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setForm((f) => ({ ...f, [field]: val }));
+    if (field === "email") {
+      setEmailSpaceError(val.includes(" "));
+    } else if (field === "password") {
+      setPasswordSpaceError(val.includes(" "));
+    }
+  };
 
   return (
     <div className="auth-page">
       <div className="auth-card fade-in">
-        <div className="auth-logo">
-          <div style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>⚗️</div>
-          <h1>Create Account</h1>
+        <div className="auth-logo" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem", marginBottom: "1.5rem" }}>
+          <img src="/logo.png" alt="AasaMedChem Logo" style={{ height: "36px", width: "auto", objectFit: "contain" }} />
+          <h1 style={{ fontSize: "1.25rem", marginTop: "0.5rem" }}>Create Account</h1>
           <p>Join AasaMedChem as a Seller</p>
         </div>
 
@@ -68,12 +82,22 @@ export default function RegisterPage() {
             <label htmlFor="reg-email" className="form-label">Email address</label>
             <input id="reg-email" type="email" className="form-input" placeholder="you@company.com"
               value={form.email} onChange={update("email")} required />
+            {emailSpaceError && (
+              <div style={{ color: "#ef4444", fontSize: "12px", marginTop: "5px", fontWeight: 500 }}>
+                ⚠️ Entered space. Please remove space.
+              </div>
+            )}
           </div>
 
           <div>
             <label htmlFor="reg-password" className="form-label">Password</label>
             <input id="reg-password" type="password" className="form-input" placeholder="Min. 8 characters"
               value={form.password} onChange={update("password")} required />
+            {passwordSpaceError && (
+              <div style={{ color: "#ef4444", fontSize: "12px", marginTop: "5px", fontWeight: 500 }}>
+                ⚠️ Entered space. Please remove space.
+              </div>
+            )}
           </div>
 
           <div>
